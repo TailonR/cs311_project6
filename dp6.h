@@ -1,5 +1,6 @@
 // dp6.h
 // Matt Perry
+// Tailon Russell
 // Started : 11/1/2019
 // Finished:
 // For CS311 Project6
@@ -39,8 +40,11 @@ void reverseList(unique_ptr<LLNode2<ValType>> & head);
 ////////////////////////////////////////////////////////
 
 template<typename KVType>
-class LLMap
+class ListMap
 {
+public:
+    using value_type = KVType;
+    using size_type = std::size_t;
 ////////////////////////////////////////////////////////
 // Data Memeber
 private:
@@ -49,13 +53,13 @@ private:
 // Deleted functions
 public:
     //Copy Ctor
-    LLMap(const LLMap & other) = delete;
+    ListMap(const ListMap & other) = delete;
     //Copy Assigment
-    LLMap & operator =(const LLMap & other) = delete;
+    ListMap & operator =(const ListMap & other) = delete;
     //Move Ctor
-    LLMap(LLMap && other) = delete;
+    ListMap(ListMap && other) = delete;
     //Move Assignment
-    LLMap & operator =(LLMap && other) = delete;
+    ListMap & operator =(ListMap && other) = delete;
 
 
 ////////////////////////////////////////////////////////
@@ -63,35 +67,57 @@ public:
 public:
     //Default Constuctor
     //
-    LLMap();
+    ListMap();
 
     //Destructor
-    ~LLMaop();
+    ~ListMap();
 
     //Size of 
-    int size();
+    int size() noexcept
+    {
+        //TODO Write Size 
+        return 0;
+
+    }
 
     //Empty check
-    bool empty();
+    bool empty()const noexcept
+    {   
+        //TODO Write Empty 
+        return true;
+    };
 
     //Find key in const set & non const
-    const KVType * find(value_type key);
-    KVType * find(value_type key);
-
-    //Inserts a key and value into set as long as no key exsist
-    insert(value_type key, size_type value);
+    const iterate find(value_type key);
+    * iterate find(value_type key);
+    void insert(value_type key,value_type value);
 
     //Erase
     //Erases a key and vlaue pair by key
-    erase(value_type key);
+    void erase(value_type key);
 
-    template<typename T>
-    traverse();
+    void traverse();
 
 ////////////////////////////////////////////////////////
 
-
 };
+
+template<typename T>
+void ListMap<T>::erase(value_type key)
+{
+    //WRITE
+}
+template<typename T>
+void ListMap<T>::insert(value_type key, value_type value)
+{
+    //WRITE
+}
+
+template<typename T>
+void ListMap<T>::traverse()
+{
+    
+}
 
 
 #endif //#ifndef FILE_DP6_H_INCLUDED
