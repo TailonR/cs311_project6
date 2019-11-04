@@ -1,6 +1,8 @@
 // llnode2.h
+// VERSION 2
 // Glenn G. Chappell
-// 2019-11-01
+// 2019-11-03
+// Started: 2019-11-01
 //
 // For CS 311 Fall 2019
 // Singly Linked List Node + Associated Functionality
@@ -138,7 +140,7 @@ void print_list(const unique_ptr<LLNode2<ValType>> & head,
         outstr << p ->_data;
         p = p->_next.get();
         if (p != nullptr)
-            cout << " ";
+            outstr << " ";
     }
     outstr << endl;
 }
