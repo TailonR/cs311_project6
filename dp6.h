@@ -24,7 +24,8 @@
 // DISC:
 ////////////////////////////////////////////////////////
 template<typename ValType>
-void reverseList(unique_ptr<LLNode2<ValType>> & head);
+void reverseList(unique_ptr<LLNode2<ValType>>& head)
+{}
 
 
 
@@ -93,14 +94,14 @@ public:
 	const value_type2 * find(value_type key) const
 	{
 		//WRITE
-		return this; //&std::basic_string<char, std::char_traits<char>, std::allocator<char>>;
+		return NULL; //this; //&std::basic_string<char, std::char_traits<char>, std::allocator<char>>;
 	}
 
 	//Find key in non const set
 	value_type2 * find(value_type key)
 	{
 		//WRITE
-		return this; //&std::basic_string<char, std::char_traits<char>, std::allocator<char>>;
+		return NULL; //this; //&std::basic_string<char, std::char_traits<char>, std::allocator<char>>;
 	}
 
     void insert(value_type key, value_type2 value);
