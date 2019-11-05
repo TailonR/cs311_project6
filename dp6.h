@@ -39,11 +39,13 @@ void reverseList(unique_ptr<LLNode2<ValType>> & head);
 // Invariants: 
 ////////////////////////////////////////////////////////
 
-template<typename KVType>
+//Listmap is supposed to take an int and a string
+template<typename KVType, typename KVType2>
 class ListMap
 {
 public:
     using value_type = KVType;
+	using value_type2 = KVType2;
     using size_type = std::size_t;
 ////////////////////////////////////////////////////////
 // Data Memeber
@@ -73,7 +75,7 @@ public:
     ~ListMap();
 
     //Size of 
-    int size() noexcept
+    const int size() const noexcept
     {
         //TODO Write Size 
         return 0;
@@ -81,43 +83,68 @@ public:
     }
 
     //Empty check
-    bool empty()const noexcept
+    bool empty() const noexcept
     {   
         //TODO Write Empty 
         return true;
     };
 
-    //Find key in const set & non const
-    const iterate find(value_type key);
-    * iterate find(value_type key);
-    void insert(value_type key,value_type value);
+    //Find key in const set
+	const value_type2 * find(value_type key) const
+	{
+		//WRITE
+		return this; //&std::basic_string<char, std::char_traits<char>, std::allocator<char>>;
+	}
+
+	//Find key in non const set
+	value_type2 * find(value_type key)
+	{
+		//WRITE
+		return this; //&std::basic_string<char, std::char_traits<char>, std::allocator<char>>;
+	}
+
+    void insert(value_type key, value_type2 value);
 
     //Erase
     //Erases a key and vlaue pair by key
     void erase(value_type key);
 
-    void traverse();
+	template<typename T3>
+    void traverse(T3);
 
 ////////////////////////////////////////////////////////
 
 };
 
-template<typename T>
-void ListMap<T>::erase(value_type key)
+template<typename T, typename T2>
+ListMap<T, T2>::ListMap()
+{
+	//WRITE
+}
+
+template<typename T, typename T2>
+ListMap<T, T2>::~ListMap()
+{
+	//WRITE
+}
+
+template<typename T, typename T2>
+void ListMap<T, T2>::erase(value_type key)
 {
     //WRITE
 }
-template<typename T>
-void ListMap<T>::insert(value_type key, value_type value)
+template<typename T, typename T2>
+void ListMap<T, T2>::insert(value_type key, value_type2 value)
 {
     //WRITE
 }
 
-template<typename T>
-void ListMap<T>::traverse()
+template<typename T, typename T2>
+template <typename T3>
+void ListMap<T, T2>::traverse(T3)
 {
-    
+    //WRITE
 }
 
 
-#endif //#ifndef FILE_DP6_H_INCLUDED
+#endif //FILE_DP6_H_INCLUDED
