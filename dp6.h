@@ -40,9 +40,9 @@ void reverseList(unique_ptr<LLNode2<ValType>>& head)
 // Invariants: 
 ////////////////////////////////////////////////////////
 
-//Listmap is supposed to take an int and a string
+//LLMap is supposed to take an int and a string
 template<typename KVType, typename KVType2>
-class ListMap
+class LLMap
 {
 public:
     using value_type = KVType;
@@ -56,13 +56,13 @@ private:
 // Deleted functions
 public:
     //Copy Ctor
-    ListMap(const ListMap & other) = delete;
+    LLMap(const LLMap & other) = delete;
     //Copy Assigment
-    ListMap & operator =(const ListMap & other) = delete;
+    LLMap & operator =(const LLMap & other) = delete;
     //Move Ctor
-    ListMap(ListMap && other) = delete;
+    LLMap(LLMap && other) = delete;
     //Move Assignment
-    ListMap & operator =(ListMap && other) = delete;
+    LLMap & operator =(LLMap && other) = delete;
 
 
 ////////////////////////////////////////////////////////
@@ -70,10 +70,10 @@ public:
 public:
     //Default Constuctor
     //
-    ListMap();
+    LLMap();
 
     //Destructor
-    ~ListMap();
+    ~LLMap();
 
     //Size of 
     const int size() const noexcept
@@ -94,14 +94,14 @@ public:
 	const value_type2 * find(value_type key) const
 	{
 		//WRITE
-		return NULL; //this; //&std::basic_string<char, std::char_traits<char>, std::allocator<char>>;
+		return nullptr; //this; //&std::basic_string<char, std::char_traits<char>, std::allocator<char>>;
 	}
 
 	//Find key in non const set
 	value_type2 * find(value_type key)
 	{
 		//WRITE
-		return NULL; //this; //&std::basic_string<char, std::char_traits<char>, std::allocator<char>>;
+		return nullptr; //this; //&std::basic_string<char, std::char_traits<char>, std::allocator<char>>;
 	}
 
     void insert(value_type key, value_type2 value);
@@ -118,31 +118,31 @@ public:
 };
 
 template<typename T, typename T2>
-ListMap<T, T2>::ListMap()
+LLMap<T, T2>::LLMap()
 {
 	//WRITE
 }
 
 template<typename T, typename T2>
-ListMap<T, T2>::~ListMap()
+LLMap<T, T2>::~LLMap()
 {
 	//WRITE
 }
 
 template<typename T, typename T2>
-void ListMap<T, T2>::erase(value_type key)
+void LLMap<T, T2>::erase(value_type key)
 {
     //WRITE
 }
 template<typename T, typename T2>
-void ListMap<T, T2>::insert(value_type key, value_type2 value)
+void LLMap<T, T2>::insert(value_type key, value_type2 value)
 {
     //WRITE
 }
 
 template<typename T, typename T2>
 template <typename T3>
-void ListMap<T, T2>::traverse(T3)
+void LLMap<T, T2>::traverse(T3)
 {
     //WRITE
 }

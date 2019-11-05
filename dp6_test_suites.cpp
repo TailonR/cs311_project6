@@ -1,6 +1,8 @@
 // dp6_test_suites.cpp
+// VERSION 2
 // Glenn G. Chappell
-// 2019-11-03
+// 2019-11-04
+// Started: 2019-11-03
 //
 // For CS 311 Fall 2019
 // Tests for Project 6 templates: test suites
@@ -455,24 +457,24 @@ TEST_CASE( "reverseList: Other requirements",
 }
 
 
-TEST_CASE( "ListMap: Member function return Types",
+TEST_CASE( "LLMap: Member function return Types",
            "[ex_b][types]" )
 {
     SECTION( "Member function empty - return type")
     {
         {
-        const ListMap<int, string> m;
+        const LLMap<int, string> m;
         bool && r(m.empty());
         (void)r;  // Avoid unused-variable warning
-        INFO( "const ListMap<T,U>::empty returns bool by val" );
+        INFO( "const LLMap<T,U>::empty returns bool by val" );
         REQUIRE( TypeCheck<bool>::check(m.empty()) );
         }
 
         {
-        ListMap<int, string> m;
+        LLMap<int, string> m;
         bool && r(m.empty());
         (void)r;  // Avoid unused-variable warning
-        INFO( "non-const ListMap<T,U>::empty returns bool by val" );
+        INFO( "non-const LLMap<T,U>::empty returns bool by val" );
         REQUIRE( TypeCheck<bool>::check(m.empty()) );
         }
     }
@@ -480,18 +482,18 @@ TEST_CASE( "ListMap: Member function return Types",
     SECTION( "Member function size - return type")
     {
         {
-        const ListMap<int, string> m;
+        const LLMap<int, string> m;
         size_t && r(m.size());
         (void)r;  // Avoid unused-variable warning
-        INFO( "const ListMap<T,U>::size returns size_t by val" );
+        INFO( "const LLMap<T,U>::size returns size_t by val" );
         REQUIRE( TypeCheck<size_t>::check(m.size()) );
         }
 
         {
-        ListMap<int, string> m;
+        LLMap<int, string> m;
         size_t && r(m.size());
         (void)r;  // Avoid unused-variable warning
-        INFO( "non-const ListMap<T,U>::size returns size_t by val" );
+        INFO( "non-const LLMap<T,U>::size returns size_t by val" );
         REQUIRE( TypeCheck<size_t>::check(m.size()) );
         }
     }
@@ -499,179 +501,179 @@ TEST_CASE( "ListMap: Member function return Types",
     SECTION( "Member function find - return type")
     {
         {
-        const ListMap<int, string> m;
+        const LLMap<int, string> m;
         const string * && r(m.find(1));
         (void)r;  // Avoid unused-variable warning
-        INFO( "const ListMap<int,string>::find returns (const string *) by val" );
+        INFO( "const LLMap<int,string>::find returns (const string *) by val" );
         REQUIRE( TypeCheck<const string *>::check(m.find(1)) );
         }
 
         {
-        ListMap<int, string> m;
+        LLMap<int, string> m;
         string * && r(m.find(1));
         (void)r;  // Avoid unused-variable warning
-        INFO( "non-const ListMap<int,string>::find returns (string *) by val" );
+        INFO( "non-const LLMap<int,string>::find returns (string *) by val" );
         REQUIRE( TypeCheck<string *>::check(m.find(1)) );
         }
 
         {
-        const ListMap<int, int> m;
+        const LLMap<int, int> m;
         const int * && r(m.find(1));
         (void)r;  // Avoid unused-variable warning
-        INFO( "const ListMap<int,int>::find returns (const int *) by val" );
+        INFO( "const LLMap<int,int>::find returns (const int *) by val" );
         REQUIRE( TypeCheck<const int *>::check(m.find(1)) );
         }
 
         {
-        ListMap<int, int> m;
+        LLMap<int, int> m;
         int * && r(m.find(1));
         (void)r;  // Avoid unused-variable warning
-        INFO( "non-const ListMap<int,int>::find returns (int *) by val" );
+        INFO( "non-const LLMap<int,int>::find returns (int *) by val" );
         REQUIRE( TypeCheck<int *>::check(m.find(1)) );
         }
 
         {
-        const ListMap<string, string> m;
+        const LLMap<string, string> m;
         const string * && r(m.find("abc"));
         (void)r;  // Avoid unused-variable warning
-        INFO( "const ListMap<string,string>::find returns (const string *) by val" );
+        INFO( "const LLMap<string,string>::find returns (const string *) by val" );
         REQUIRE( TypeCheck<const string *>::check(m.find("abc")) );
         }
 
         {
-        ListMap<string, string> m;
+        LLMap<string, string> m;
         string * && r(m.find("abc"));
         (void)r;  // Avoid unused-variable warning
-        INFO( "non-const ListMap<string,string>::find returns (string *) by val" );
+        INFO( "non-const LLMap<string,string>::find returns (string *) by val" );
         REQUIRE( TypeCheck<string *>::check(m.find("abc")) );
         }
     }
 }
 
 
-TEST_CASE( "ListMap: insert, erase, find",
+TEST_CASE( "LLMap: insert, erase, find",
            "[ex_b][actions]" )
 {
     SECTION( "Empty map" )
     {
-        ListMap<int, string> m;
+        LLMap<int, string> m;
 
         {
-        INFO( "empty #1 returns true for empty ListMap" );
+        INFO( "empty #1 returns true for empty LLMap" );
         REQUIRE( m.empty() );
         }
         {
-        INFO( "size #1 returns 0 for empty ListMap" );
+        INFO( "size #1 returns 0 for empty LLMap" );
         REQUIRE( m.size() == 0 );
         }
         {
-        INFO( "find #1 on empty ListMap returns nullptr" );
+        INFO( "find #1 on empty LLMap returns nullptr" );
         REQUIRE( m.find(1) == nullptr );
         }
         {
-        INFO( "find #2 on empty ListMap returns nullptr" );
+        INFO( "find #2 on empty LLMap returns nullptr" );
         REQUIRE( m.find(100) == nullptr );
         }
         {
-        INFO( "empty #2 returns true for empty ListMap" );
+        INFO( "empty #2 returns true for empty LLMap" );
         REQUIRE( m.empty() );
         }
         {
-        INFO( "size #2 returns 0 for empty ListMap" );
+        INFO( "size #2 returns 0 for empty LLMap" );
         REQUIRE( m.size() == 0 );
         }
     }
 
     SECTION( "Size 1 map" )
     {
-        ListMap<int, string> m;
+        LLMap<int, string> m;
         m.insert(100, "abc");
 
         {
-        INFO( "empty returns false for size 1 ListMap" );
+        INFO( "empty returns false for size 1 LLMap" );
         REQUIRE( !m.empty() );
         }
         {
-        INFO( "size returns 1 for size-1 ListMap" );
+        INFO( "size returns 1 for size-1 LLMap" );
         REQUIRE( m.size() == 1 );
         }
         {
-        INFO( "find #1 on size-1 ListMap returns nullptr" );
+        INFO( "find #1 on size-1 LLMap returns nullptr" );
         REQUIRE( m.find(1) == nullptr );
         }
         {
-        INFO( "find #2 on size-1 ListMap returns non-nullptr" );
+        INFO( "find #2 on size-1 LLMap returns non-nullptr" );
         REQUIRE( m.find(100) != nullptr );
         }
         {
-        INFO( "find #2 on size-1 ListMap returns ptr to value inserted" );
+        INFO( "find #2 on size-1 LLMap returns ptr to value inserted" );
         REQUIRE( *(m.find(100)) == "abc" );
         }
     }
 
     SECTION( "Size 2 map" )
     {
-        ListMap<int, string> m;
+        LLMap<int, string> m;
         m.insert(100, "abc");
         m.insert(101, "def");
 
         {
-        INFO( "empty returns false for size 2 ListMap" );
+        INFO( "empty returns false for size 2 LLMap" );
         REQUIRE( !m.empty() );
         }
         {
-        INFO( "size returns 2 for size-2 ListMap" );
+        INFO( "size returns 2 for size-2 LLMap" );
         REQUIRE( m.size() == 2 );
         }
         {
-        INFO( "find #1 on size-2 ListMap returns nullptr" );
+        INFO( "find #1 on size-2 LLMap returns nullptr" );
         REQUIRE( m.find(1) == nullptr );
         }
         {
-        INFO( "find #2 on size-2 ListMap returns non-nullptr" );
+        INFO( "find #2 on size-2 LLMap returns non-nullptr" );
         REQUIRE( m.find(100) != nullptr );
         }
         {
-        INFO( "find #2 on size-2 ListMap returns ptr to value inserted" );
+        INFO( "find #2 on size-2 LLMap returns ptr to value inserted" );
         REQUIRE( *(m.find(100)) == "abc" );
         }
         {
-        INFO( "find #3 on size-2 ListMap returns non-nullptr" );
+        INFO( "find #3 on size-2 LLMap returns non-nullptr" );
         REQUIRE( m.find(101) != nullptr );
         }
         {
-        INFO( "find #3 on size-2 ListMap returns ptr to value inserted" );
+        INFO( "find #3 on size-2 LLMap returns ptr to value inserted" );
         REQUIRE( *(m.find(101)) == "def" );
         }
         {
-        INFO( "find #4 on size-2 ListMap returns nullptr" );
+        INFO( "find #4 on size-2 LLMap returns nullptr" );
         REQUIRE( m.find(200) == nullptr );
         }
     }
 
     SECTION( "Modifying value in map" )
     {
-        ListMap<int, string> m;
+        LLMap<int, string> m;
         m.insert(100, "abc");
         m.insert(101, "def");
 
         {
-        INFO( "find #1 on size-2 ListMap returns ptr to value inserted" );
+        INFO( "find #1 on size-2 LLMap returns ptr to value inserted" );
         REQUIRE( *(m.find(100)) == "abc" );
         }
         {
-        INFO( "find #2 on size-2 ListMap returns ptr to value inserted" );
+        INFO( "find #2 on size-2 LLMap returns ptr to value inserted" );
         REQUIRE( *(m.find(101)) == "def" );
         }
 
         *(m.find(100)) = "x";
 
         {
-        INFO( "find #1 on size-2 ListMap returns ptr to new value" );
+        INFO( "find #1 on size-2 LLMap returns ptr to new value" );
         REQUIRE( *(m.find(100)) == "x" );
         }
         {
-        INFO( "find #2 on size-2 ListMap returns ptr to original value" );
+        INFO( "find #2 on size-2 LLMap returns ptr to original value" );
         REQUIRE( *(m.find(101)) == "def" );
         }
     }
@@ -679,7 +681,7 @@ TEST_CASE( "ListMap: insert, erase, find",
     SECTION( "Larger map, with erase calls" )
     {
         const int SIZE = 1000;  // Size for loops
-        ListMap<int, int> m;
+        LLMap<int, int> m;
         for (int i = 0; i < SIZE*2; ++i)
         {
             m.insert(i, 2*i);
@@ -742,12 +744,12 @@ TEST_CASE( "ListMap: insert, erase, find",
 }
 
 
-TEST_CASE( "ListMap: traverse",
+TEST_CASE( "LLMap: traverse",
            "[ex_b][actions]" )
 {
     SECTION( "Traverse of empty map" )
     {
-        ListMap<int, int> m;
+        LLMap<int, int> m;
         vector<pair<int, int>> expected {
         };
 
@@ -762,7 +764,7 @@ TEST_CASE( "ListMap: traverse",
 
     SECTION( "Traverse of size-1 map" )
     {
-        ListMap<int, int> m;
+        LLMap<int, int> m;
         m.insert(5, 7);
         vector<pair<int, int>> expected {
             { 5, 7 }
@@ -779,7 +781,7 @@ TEST_CASE( "ListMap: traverse",
 
     SECTION( "Traverse of size-4 map" )
     {
-        ListMap<int, int> m;
+        LLMap<int, int> m;
         m.insert(5, 7);
         m.insert(8, 3);
         m.insert(1, 8);
@@ -803,7 +805,7 @@ TEST_CASE( "ListMap: traverse",
     SECTION( "Traverse of map after inserts & erase" )
     {
         const int SIZE = 1000;  // Size for loops
-        ListMap<int, int> m;
+        LLMap<int, int> m;
         for (int i = 0 ; i < SIZE*4; ++i)
         {
             m.insert(i, 3*i);

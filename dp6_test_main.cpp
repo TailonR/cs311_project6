@@ -1,6 +1,8 @@
 // dp6_test_main.cpp
+// VERSION 2
 // Glenn G. Chappell
-// 2019-11-03
+// 2019-11-04
+// Started: 2019-11-03
 //
 // For CS 311 Fall 2019
 // Tests for Project 6 templates: main program
