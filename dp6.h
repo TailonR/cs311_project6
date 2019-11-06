@@ -25,7 +25,19 @@
 ////////////////////////////////////////////////////////
 template<typename ValType>
 void reverseList(unique_ptr<LLNode2<ValType>>& head)
-{}
+{
+    /// not quite working need a way to generate ptrs.
+    newhead = make_unique<ValType> (nullptr);
+    next = make_unique<LLNode2>(nullptr);
+    while(head)
+    {   
+        next = head->next;
+        head->next = newhead;
+        newhead = head;
+        head = next;
+    }
+    head = newhead;
+}
 
 
 
