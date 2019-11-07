@@ -24,19 +24,18 @@
 // DISC:
 ////////////////////////////////////////////////////////
 template<typename ValType>
-void reverseList(unique_ptr<LLNode2<ValType>>& head)
+void reverseList(unique_ptr<LLNode2<ValType>> & head)
 {
-    /// not quite working need a way to generate ptrs.
-    newhead = make_unique<ValType> (nullptr);
-    next = make_unique<LLNode2>(nullptr);
+    std::unique_ptr<LLNode2<ValType>> newhead= nullptr;
+	std::unique_ptr<LLNode2<ValType>> next = nullptr;
     while(head)
     {   
-        next = head->next;
-        head->next = newhead;
-        newhead = head;
-        head = next;
+        next = std::move(head->_next);
+		head->_next = std::move(newhead);
+		newhead = std::move(head);
+		head = std::move(next);
     }
-    head = newhead;
+     head = std::move(newhead);
 }
 
 
