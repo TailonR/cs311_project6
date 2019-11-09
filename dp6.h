@@ -13,7 +13,8 @@
 #define FILE_DP6_H_INCLUDED
 
 #include "llnode2.h"
-
+#include <tuple>
+#include <functional>
 ////////////////////////////////////////////////////////
 // Exercise A Reversing a Linked List
 // Function template named reverseList
@@ -55,14 +56,15 @@ void reverseList(unique_ptr<LLNode2<ValType>> & head)
 template<typename KVType, typename KVType2>
 class LLMap
 {
-public:
-    using value_type = KVType;
-	using value_type2 = KVType2;
-    using size_type = std::size_t;
+    typedef KVType KEY_TYPE;
+    typedef KVType2 DATA_TYPE;
+    typedef std::tuple<KEY_TYPE, DATA_TYPE> KVTYPE3;
+    typedef std::function<void (KEY_TYPE, DATA_TYPE)> FUNC;
+    
 ////////////////////////////////////////////////////////
 // Data Memeber
 private:
-    std::unique_ptr<LLNode2<KVType>> _data;
+    std::unique_ptr<LLNode2<KVType>> _head;
 ////////////////////////////////////////////////////////
 // Deleted functions
 public:
@@ -87,73 +89,90 @@ public:
     ~LLMap();
 
     //Size of 
-    const int size() const noexcept
-    {
-        //TODO Write Size 
-        return 0;
-
-    }
+    size_t size() const;
 
     //Empty check
-    bool empty() const noexcept
-    {   
-        //TODO Write Empty 
-        return true;
-    };
+    bool empty() const noexcept;
 
     //Find key in const set
-	const value_type2 * find(value_type key) const
-	{
-		//WRITE
-		return nullptr; //this; //&std::basic_string<char, std::char_traits<char>, std::allocator<char>>;
-	}
+	const DATA_TYPE * find(const KEY_TYPE & key) const;
 
 	//Find key in non const set
-	value_type2 * find(value_type key)
-	{
-		//WRITE
-		return nullptr; //this; //&std::basic_string<char, std::char_traits<char>, std::allocator<char>>;
-	}
+	DATA_TYPE * find(const KEY_TYPE & key);
 
-    void insert(value_type key, value_type2 value);
+    void insert(const KEY_TYPE & key, const DATA_TYPE & value);
 
     //Erase
     //Erases a key and vlaue pair by key
-    void erase(value_type key);
+    void erase(const KEY_TYPE & key);
 
-	template<typename T3>
-    void traverse(T3);
+    void traverse(FUNC);
 
 ////////////////////////////////////////////////////////
 
 };
 
-template<typename T, typename T2>
-LLMap<T, T2>::LLMap()
+template<typename KVType, typename KVType2>
+LLMap<KVType, KVType2>::LLMap()
+{
+	_head = nullptr;
+}
+
+template<typename KVType, typename KVType2>
+LLMap<KVType, KVType2>::~LLMap()
 {
 	//WRITE
 }
 
-template<typename T, typename T2>
-LLMap<T, T2>::~LLMap()
+template<typename KVType, typename KVType2>
+size_t LLMap<KVType,KVType2>::size() const
 {
-	//WRITE
+     size_t counter = 1;
+    // auto current = std::move(_head->_next);
+    // while(current)
+    // {
+    //     current = std::move(current->_next);
+    //     counter++;
+
+    // }
+    return counter;
 }
 
-template<typename T, typename T2>
-void LLMap<T, T2>::erase(value_type key)
+template<typename KVType, typename KVType2>
+bool LLMap<KVType,KVType2>::empty()const noexcept
+{
+    return true;
+}
+
+template<typename KVType, typename KVType2>
+void LLMap<KVType,KVType2>::erase(const typename LLMap<KVType,KVType2>::KEY_TYPE & key)
 {
     //WRITE
 }
-template<typename T, typename T2>
-void LLMap<T, T2>::insert(value_type key, value_type2 value)
+template<typename KVType, typename KVType2>
+void LLMap<KVType,KVType2>::insert(const typename LLMap<KVType,KVType2>::KEY_TYPE & key, const typename LLMap<KVType,KVType2>::DATA_TYPE & value)
 {
     //WRITE
 }
 
-template<typename T, typename T2>
-template <typename T3>
-void LLMap<T, T2>::traverse(T3)
+template<typename KVType, typename KVType2>
+const typename LLMap<KVType,KVType2>::DATA_TYPE * LLMap<KVType,KVType2>::find(const typename LLMap<KVType,KVType2>::KEY_TYPE & key) const
+{
+    // auto current = std::move(_head);
+    DATA_TYPE * ptr = nullptr;
+    // ptr = std::move(current);
+    return  ptr;
+}
+
+template<typename KVType, typename KVType2>
+typename LLMap<KVType,KVType2>::DATA_TYPE * LLMap<KVType,KVType2>::find(const typename LLMap<KVType,KVType2>::KEY_TYPE & key)
+{
+    DATA_TYPE * ptr = nullptr;
+    return ptr;
+}
+
+template<typename KVType, typename KVType2>
+void LLMap<KVType,KVType2>::traverse(const typename LLMap<KVType,KVType2>::FUNC f)
 {
     //WRITE
 }
