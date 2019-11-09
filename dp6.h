@@ -64,7 +64,7 @@ class LLMap
 ////////////////////////////////////////////////////////
 // Data Memeber
 private:
-    std::unique_ptr<LLNode2<KVType>> _head;
+    std::unique_ptr<LLNode2<KVTYPE3>> _head;
 ////////////////////////////////////////////////////////
 // Deleted functions
 public:
@@ -121,60 +121,94 @@ LLMap<KVType, KVType2>::LLMap()
 template<typename KVType, typename KVType2>
 LLMap<KVType, KVType2>::~LLMap()
 {
-	//WRITE
+	_head.reset();
 }
 
 template<typename KVType, typename KVType2>
 size_t LLMap<KVType,KVType2>::size() const
 {
-     size_t counter = 1;
-    // auto current = std::move(_head->_next);
-    // while(current)
-    // {
-    //     current = std::move(current->_next);
-    //     counter++;
-
-    // }
-    return counter;
+    return ::size(_head);
 }
 
 template<typename KVType, typename KVType2>
 bool LLMap<KVType,KVType2>::empty()const noexcept
 {
-    return true;
+	return(size() == 0);
 }
 
 template<typename KVType, typename KVType2>
 void LLMap<KVType,KVType2>::erase(const typename LLMap<KVType,KVType2>::KEY_TYPE & key)
 {
-    //WRITE
+	auto current = _head.get();
+	while (true)
+	{
+		if (key == std::get<0>(current->_data))
+		{
+			std::swap(current->_data, _head->_data);
+			::pop_front(_head);
+			break;
+		}
+		current = current->_next.get();
+	}
 }
 template<typename KVType, typename KVType2>
 void LLMap<KVType,KVType2>::insert(const typename LLMap<KVType,KVType2>::KEY_TYPE & key, const typename LLMap<KVType,KVType2>::DATA_TYPE & value)
 {
-    //WRITE
+	auto current = _head.get();
+	auto ptr = find(key);
+	if (find(key))
+	{
+		std::get<1>(current->_data) = value;
+	}
+	else
+	{
+		::push_front(_head, std::make_tuple(key, value));
+	}
 }
 
 template<typename KVType, typename KVType2>
 const typename LLMap<KVType,KVType2>::DATA_TYPE * LLMap<KVType,KVType2>::find(const typename LLMap<KVType,KVType2>::KEY_TYPE & key) const
 {
-    // auto current = std::move(_head);
-    DATA_TYPE * ptr = nullptr;
-    // ptr = std::move(current);
-    return  ptr;
+    //auto current = std::move(_head);
+    auto current = _head.get();
+	DATA_TYPE* ptr = nullptr;
+	while (current)
+	{
+		if (key == std::get<0>(current->_data))
+		{
+			ptr = &(std::get<1>(current->_data));
+		}
+		current = current->_next.get();
+	}
+    return ptr;
 }
 
 template<typename KVType, typename KVType2>
 typename LLMap<KVType,KVType2>::DATA_TYPE * LLMap<KVType,KVType2>::find(const typename LLMap<KVType,KVType2>::KEY_TYPE & key)
 {
-    DATA_TYPE * ptr = nullptr;
-    return ptr;
+	auto current = _head.get();
+	DATA_TYPE* ptr = nullptr;
+	while (current)
+	{
+		if (key == std::get<0>(current->_data))
+		{
+			ptr = &(std::get<1>(current->_data));
+		}
+		current = current->_next.get();
+	}
+	return ptr;
 }
 
 template<typename KVType, typename KVType2>
 void LLMap<KVType,KVType2>::traverse(const typename LLMap<KVType,KVType2>::FUNC f)
 {
-    //WRITE
+	while (_head)
+	{
+		KEY_TYPE& key = std::get<0>(_head->_data);
+		DATA_TYPE& value = std::get<1>(_head->_data);
+		f(key, value);
+		_head = std::move(_head->_next);
+	}
 }
 
 
