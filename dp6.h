@@ -202,12 +202,13 @@ typename LLMap<KVType,KVType2>::DATA_TYPE * LLMap<KVType,KVType2>::find(const ty
 template<typename KVType, typename KVType2>
 void LLMap<KVType,KVType2>::traverse(const typename LLMap<KVType,KVType2>::FUNC f)
 {
-	while (_head)
-	{
-		KEY_TYPE& key = std::get<0>(_head->_data);
-		DATA_TYPE& value = std::get<1>(_head->_data);
+	auto current = _head.get();
+	while (current)
+	{`
+		KEY_TYPE& key = std::get<0>(current->_data);
+		DATA_TYPE& value = std::get<1>(current->_data);
 		f(key, value);
-		_head = std::move(_head->_next);
+		current = current->_next.get();
 	}
 }
 
