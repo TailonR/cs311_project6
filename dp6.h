@@ -2,7 +2,7 @@
 // Matt Perry
 // Tailon Russell
 // Started : 11/1/2019
-// Finished:
+// Finished: 11/8/2019
 // For CS311 Project6
 // dp6.h is a header file for Reversing a Linked List
 // As well as Associative Dataset Class Template
@@ -13,8 +13,8 @@
 #define FILE_DP6_H_INCLUDED
 
 #include "llnode2.h"
-#include <tuple>
-#include <functional>
+#include <tuple> //for std::tuple 
+#include <functional> //for templated functions std::function
 ////////////////////////////////////////////////////////
 // Exercise A Reversing a Linked List
 // reverseList(unique_ptr<LLNode2<ValType>> & head)
@@ -26,7 +26,7 @@
 template<typename ValType>
 void reverseList(unique_ptr<LLNode2<ValType>> & head)
 {
-    std::unique_ptr<LLNode2<ValType>> newhead= nullptr;
+	std::unique_ptr<LLNode2<ValType>> newhead= nullptr;
 	std::unique_ptr<LLNode2<ValType>> next = nullptr;
     while(head)
     {   
@@ -46,7 +46,7 @@ void reverseList(unique_ptr<LLNode2<ValType>> & head)
 // class LLMap
 // LLMap creates a linked list of LLNode2's of type KVType3
 // Invariants: Head points to a LLNode2 of KVType3 which is be a tuple
-////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
 
 template<typename KVType, typename KVType2>
 class LLMap
@@ -77,9 +77,9 @@ public:
 // Member Functions
 public:
     //Default Constuctor
-    //construct LLMap with head being a null pointer and size = 0
+    //Disc: construct LLMap with head being a null pointer and size = 0
 	//Pre: None
-	//Error: None
+	//Error: Strong Guarantee
     LLMap();
 
     //Default Destructor
@@ -88,48 +88,47 @@ public:
 	~LLMap() = default;
 
     //size()
-	//returns the number of nodes in the linked list
+	//Disc: returns the number of nodes in the linked list
 	//Pre: None
-	//Error: None
+	//Error: Strong Guarantee
 	size_t size() const;
 
     //empty()
-	//returns true if size() = 0, false if not
-	//Error: No-except
+	//Disc: returns true if size() = 0, false if not
+	//Error: Strong Guarantee
 	bool empty() const noexcept;
 
     //const find()
-	//returns a const pointer to the value of a given key
-	//Pre: key needs to have a valid type 
-	//Error: No-except
+	//Disc: returns a const pointer to the value of a given key
+	//Pre: key needs to be a valid type 
+	//Error: Strong Guarantee
 	const DATA_TYPE * find(const KEY_TYPE & key) const;
 
 	//non-const find()
-	//returns a pointer to the value of a given key
-	//Pre: key needs to have a valid type
-	//Error: No-except
+	//Disc: returns a pointer to the value of a given key
+	//Pre: key needs to be a valid type
+	//Error: Strong Guarantee
 	DATA_TYPE * find(const KEY_TYPE & key);
 
 	//insert()
-	//returns a pointer to the value of a given key
-	//Pre: key and value need to have a valid
-	//Error: No-except
+	//Disc: returns a pointer to the value of a given key
+	//Pre: key and value need to be a valid type
+	//Error: Strong Guarantee
     void insert(const KEY_TYPE & key, const DATA_TYPE & value);
 
     //erase()
-    //erases the key and vlaue pair indicated by key
-	//Pre: key needs to be of a valid type
+    //Disc: erases the key and vlaue pair indicated by key
+	//Pre: key needs to be be a valid type
 	//Error: Strong Guarantee
     void erase(const KEY_TYPE & key);
 
-	//traverse(funct)
-	//calls the given template function on every key-value pair of the linked list
-	//Pre: the given function needs to be a valid template function
-	//Error: None
+	//traverse()
+	//Disc: calls the given template function on every key-value pair of the linked list
+	//Pre: the given function needs to be a valid, and Key and Value must be valid types.
+	//Error:Strong Guarantee
     void traverse(FUNC);
 
 ////////////////////////////////////////////////////////
-
 };
 
 //See class definition above for docs
@@ -183,7 +182,6 @@ template<typename KVType, typename KVType2>
 void LLMap<KVType,KVType2>::insert(const typename LLMap<KVType,KVType2>::KEY_TYPE & key, const typename LLMap<KVType,KVType2>::DATA_TYPE & value)
 {
 	auto current = _head.get();
-	auto ptr = find(key);
 	if (find(key))
 	{
 		std::get<1>(current->_data) = value;
@@ -199,7 +197,7 @@ template<typename KVType, typename KVType2>
 const typename LLMap<KVType,KVType2>::DATA_TYPE * LLMap<KVType,KVType2>::find(const typename LLMap<KVType,KVType2>::KEY_TYPE & key) const
 {
     auto current = _head.get();
-	DATA_TYPE* ptr = nullptr;
+	DATA_TYPE * ptr = nullptr;
 	while (current)
 	{
 		if (key == std::get<0>(current->_data))
